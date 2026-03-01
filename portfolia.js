@@ -1,16 +1,10 @@
 
+const menuIcon = document.querySelector('#menu');
+const navbar = document.querySelector('nav');
 
- logoLink.addEventListener('click', () =>{
-   if  (!navLinks[0].classList.contains('active')){
-    activePage();
-
-    navLinks[0].classList.add('active');}
-
-      setTimeout(()=>{
-      sections[0].classList.add('active');
-     }, 1100);    
-   
- });
+menuIcon.onclick = () => {
+  navbar.classList.toggle('active');
+};
 
 const resumeBtns = document.querySelectorAll('.resume-btn');
 const resumeDetails = document.querySelectorAll('.resume-detail');
@@ -78,3 +72,29 @@ arrowLeft.addEventListener('click', () => {
 // Initial call to show first item
 activePortfolio();
  
+
+// for higlights section
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("header nav a");
+
+window.addEventListener("scroll", () => {
+
+  let current = "";
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+
+    if (scrollY >= sectionTop - 200) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
+
+});
